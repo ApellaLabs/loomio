@@ -1,4 +1,11 @@
 zh-TW:
+  users:
+    email_preferences:
+      edit:
+        title: 'Email 偏好設定'
+        when_do_you_want_emails: 'Email 給我：'
+        email_missed_yesterday: "「昨日 Loomio」— 每日我錯過的活動摘要"
+        submit: "儲存偏好設定"
   explore:
     header: "探索公開群組"
   try_it:
@@ -156,6 +163,9 @@ zh-TW:
     public_groups: '公開群組'
     terms: '聲明'
   inbox:
+    clear: '清除'
+    title: '收件匣'
+    preferences: '收件匣偏好設定'
     dropdown-btn: '收件匣'
     empty: 您跟上了進度！意見通通都看過了。
   notifications:
@@ -209,6 +219,8 @@ zh-TW:
   prompt_user_to_join:
     header: "加入群組以參與"
     body: "您必須是這個群組的成員才可以發表意見或是表決。"
+  user_profile:
+    about_deactivation: "這會是甚麼意思？"
   group_form:
     name: "群組名稱"
     description: "描述"
@@ -348,6 +360,10 @@ zh-TW:
   group_description: "群組描述"
   edit_group_description: "編輯群組的描述"
   group_subscription: "群組訂閱"
+  groups:
+    follow:
+      click_to_follow: "點此跟隨群組"
+      click_to_unfollow: "點此取消跟隨群組"
   group_request:
     beta_request_header: "在 Loomio Beta 上啟動群組"
     beta_request_description: "要開始在 Loomio Beta 上作決策，第一步是啟動群組"
@@ -382,6 +398,8 @@ zh-TW:
   go_to_add_comment_html: "<a href='%{href}'>前往討論串的底部</a>增加意見。"
   comment_by: "%{comment_author} 的意見"
   discussion_list:
+    filter_followed:
+      enable: "僅顯示跟隨的討論串"
     empty:
       no_discussions: "您的群組尚未有任何的討論串。"
       no_discussions_in_group: "這個群組還未有任何的討論串。"
@@ -511,7 +529,7 @@ zh-TW:
     keep_up_to_date_html: |
       <p>點擊您畫面上方的群組名稱以進入群組頁面，頁面中您可看到該群組的討論與決定清單。
       若您加入一個以上的群組，您可在首頁看到所有您加入的群組及其所有活動。 </p>
-      <p>當您的群組有要事發生時，您將會收到通知信。您可<a href="%{link}"">於此</a>更改您偏好使用的電子郵件信箱。</p>
+      <p>當您的群組有要事發生時，您將會收到通知信。您可<a href="%{link}"">於此</a>更改您的 email 偏好設定。</p>
     make_a_decision: "作出決策"
     make_a_decision_description: "當群組準備好制定決策時，任何人都可以提案。替行動方案做出概要以及提供一些背景資料，讓每個人都能明確知道贊成與否所代表的真正意義。"
     prompt_people_details: "假如您想得到群組內特定人士的注意，先按下「@」緊接著輸入他們的大名。他們會收到一封 email，提醒他們在某則討論串中被提及。"
@@ -787,8 +805,8 @@ zh-TW:
     user_added_to_a_group:
       subject: "%{who} 將您加入至 %{which_group}"
       content: "%{who} 將您加入至 Loomio 的 %{which_group} 。點選這裡前往群組："
-    unsubscribe: "取消訂閱，或是變更您的email設定："
-    unsubscribe_html: "<a href='%{link_path}'>%{link_text}</a>取消訂閱或變更個人郵件設定。"
+    unsubscribe: "取消訂閱或者變更您的 email 偏好設定："
+    unsubscribe_html: "<a href='%{link_path}'>%{link_text}</a>取消訂閱或者變更您的 email 偏好設定。"
     view_comment: "點擊此處，您可以看到在 Loomio 上的意見。"
     view_discussion: "點擊此處，您可以看到這條討論串。"
     view_group: "點擊此處檢視 Loomio 上的群組"
@@ -841,6 +859,9 @@ zh-TW:
       closes_in: "即將結束："
       headline: "%{author} 在 %{group} 群組的提案很快就要定案了："
       summary: "摘要"
+    thread_mailer:
+      change_email_preferences_html: "變更您的 <a href='%{email_preferences_url}'>email 偏好設定</a>以取消訂閱來自 Loomio 的電子郵件。"
+      change_preferences: "變更您的電子郵件偏好設定："
     verification:
       header: "您就快完成了！"
       intro: "為了完成您的申請，請點擊此認證連結："
@@ -914,8 +935,13 @@ zh-TW:
   google: "Google"
   persona: "人物誌"
   common:
+    settings: 設定
+    unread: 未讀
+    following: 正在跟隨
+    not_following: 尚未跟隨
     back_to_discussion: "回到討論串"
     edited: 編輯紀錄
+    groups: "群組"
     today: 今天
     months:
       january: 一月
