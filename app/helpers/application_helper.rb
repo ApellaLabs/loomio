@@ -103,6 +103,12 @@ module ApplicationHelper
     Redcarpet::Render::SmartyPants.render(output).html_safe
   end
 
+  def text_direction(object)
+    locale = object.locale.to_sym
+
+    Loomio::I18n::RTL_LOCALES.include?(locale) ? 'RTL' : 'LTR'
+  end
+
   def show_contribution_icon?
     current_user && !current_user.belongs_to_manual_subscription_group?
   end
