@@ -1,0 +1,19 @@
+= form_for @pro_con do |f|
+  - if @pro_con.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pro_con.errors.count, "error")} prohibited this pro_con from being saved:"
+      %ul
+        - @pro_con.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :body
+    = f.text_area :body
+  .field
+    = f.label :cons
+    = f.text_field :cons
+  .field
+    = f.label :user_id
+    = @pro_con.discussion.user.name
+  .actions
+    = f.submit 'Save'

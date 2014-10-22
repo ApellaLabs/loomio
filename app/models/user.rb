@@ -96,10 +96,11 @@ class User < ActiveRecord::Base
   has_many :motion_readers, dependent: :destroy
   has_many :omniauth_identities, dependent: :destroy
 
-
   has_many :notifications, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :attachments
+
+  has_many :smiles, dependent: :destroy
 
   has_one :deactivation_response,
           class_name: 'UserDeactivationResponse'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141006011358) do
+ActiveRecord::Schema.define(version: 20141022154007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -454,6 +454,21 @@ ActiveRecord::Schema.define(version: 20141006011358) do
   add_index "omniauth_identities", ["email"], name: "index_personas_on_email", using: :btree
   add_index "omniauth_identities", ["provider", "uid"], name: "index_omniauth_identities_on_provider_and_uid", using: :btree
   add_index "omniauth_identities", ["user_id"], name: "index_personas_on_user_id", using: :btree
+
+  create_table "pro_cons", force: true do |t|
+    t.text     "body"
+    t.boolean  "cons"
+    t.integer  "discussion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "smiles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "pro_con_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "subscriptions", force: true do |t|
     t.integer  "group_id"

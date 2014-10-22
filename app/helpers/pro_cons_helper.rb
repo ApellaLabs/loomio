@@ -1,0 +1,2 @@
+module ProConsHelper
+end

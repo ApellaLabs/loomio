@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Body:
+  = @pro_con.body
+%p
+  %b User:
+  = @pro_con.user_id
+
+= link_to 'Edit', edit_pro_con_path(@pro_con)
+\|
+= link_to 'Back', pro_cons_path

@@ -1,5 +1,7 @@
 Loomio::Application.routes.draw do
 
+  resources :pro_cons
+
   slug_regex = /[a-z0-9\-\_]*/i
 
   ActiveAdmin.routes(self)

@@ -1,0 +1,21 @@
+%h1 Listing pro_cons
+
+%table
+  %tr
+    %th Body
+    %th User
+    %th
+    %th
+    %th
+
+  - @pro_cons.each do |pro_con|
+    %tr
+      %td= pro_con.body
+      %td= pro_con.user_id
+      %td= link_to 'Show', pro_con
+      %td= link_to 'Edit', edit_pro_con_path(pro_con)
+      %td= link_to 'Destroy', pro_con, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Pro con', new_pro_con_path

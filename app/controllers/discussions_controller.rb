@@ -97,6 +97,9 @@ class DiscussionsController < GroupBaseController
 
     @group = @discussion.group
 
+    @pro_con = ProCon.new
+    @pro_con.discussion = @discussion
+
     if params[:proposal]
       @motion = @discussion.motions.find_by_key!(params[:proposal])
     else
