@@ -16,7 +16,8 @@ class Vote < ActiveRecord::Base
     end
   end
 
-  POSITIONS = %w[yes abstain no block]
+  # POSITIONS = %w[yes abstain no block]
+  POSITIONS = %w[yes abstain no]
   default_scope { includes(:previous_vote) }
   belongs_to :motion, counter_cache: true, touch: :last_vote_at
   belongs_to :user

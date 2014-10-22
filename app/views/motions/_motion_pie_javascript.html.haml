@@ -30,6 +30,40 @@
       }
     ]
   }
-  var options = { showTooltips: false, animation: false }
+  var options = {
+    showTooltips: false,
+    animation: false
+  }
 
   var myPieChart = new Chart(ctx).Pie(data, options);
+
+
+  $('canvas').on('click', function(evt) {
+
+      $('.votes').show().offset({
+          top: evt.pageY,
+          left: evt.pageX
+      });
+  });
+
+
+  //$('canvas').on('mousemove', function(e) {
+  //
+  //    var topL = e.pageY - $('.votes').height() - 20,
+  //        topM = e.pageY + 20;
+  //
+  //    var leftL = e.pageX - 100,
+  //        leftM = e.pageX;
+  //
+  //    $('.votes').offset({
+  //        top: topL < 0 ? topM : topL,
+  //        left: leftL < 0 ? leftM : leftL
+  //    });
+  //
+  //});
+
+  $('.vote-close').on('click', function(){
+
+      $('.votes').slideUp();
+
+  });

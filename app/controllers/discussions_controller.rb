@@ -13,6 +13,9 @@ class DiscussionsController < GroupBaseController
   end
 
   def new
+
+    logger.info ">>>>>>>>>>>>>>>> new"
+
     @discussion = Discussion.new
     @discussion.uses_markdown = current_user.uses_markdown
     @group = Group.find_by_id params[:group_id]
@@ -20,9 +23,15 @@ class DiscussionsController < GroupBaseController
   end
 
   def edit
+
+    logger.info ">>>>>>>>>>>>>>>> edit"
+
   end
 
   def update
+
+    logger.info ">>>>>>>>>>>>>>>> update"
+
     if DiscussionService.edit_discussion(current_user, permitted_params.discussion, @discussion)
       flash[:notice] = 'Discussion was successfully updated.'
       redirect_to @discussion
@@ -33,6 +42,9 @@ class DiscussionsController < GroupBaseController
   end
 
   def create
+
+    logger.info ">>>>>>>>>>>>>>>> create"
+
     build_discussion
     if DiscussionService.start_discussion(@discussion)
       flash[:success] = t("success.discussion_created")
@@ -44,12 +56,18 @@ class DiscussionsController < GroupBaseController
   end
 
   def destroy
+
+    logger.info ">>>>>>>>>>>>>>>> destroy"
+
     @discussion.delayed_destroy
     flash[:success] = t("success.discussion_deleted")
     redirect_to @discussion.group
   end
 
   def index
+
+    logger.info ">>>>>>>>>>>>>>>> index"
+
     if params[:group_id].present?
       @group = Group.find(params[:group_id])
       if cannot? :show, @group
@@ -74,6 +92,9 @@ class DiscussionsController < GroupBaseController
   end
 
   def show
+
+    logger.info ">>>>>>>>>>>>>>>> show"
+
     @group = @discussion.group
 
     if params[:proposal]
@@ -103,16 +124,25 @@ class DiscussionsController < GroupBaseController
   end
 
   def follow
+
+    logger.info ">>>>>>>>>>>>>>>> follow"
+
     DiscussionReader.for(discussion: @discussion, user: current_user).follow!
     redirect_to discussion_url @discussion
   end
 
   def unfollow
+
+    logger.info ">>>>>>>>>>>>>>>> unfollow"
+
     DiscussionReader.for(discussion: @discussion, user: current_user).unfollow!
     redirect_to discussion_url @discussion
   end
 
   def move
+
+    logger.info ">>>>>>>>>>>>>>>> move"
+
     destination_group = Group.find params[:destination_group_id]
 
     discussion_mover = MoveDiscussionService.new(discussion: @discussion,
@@ -128,6 +158,9 @@ class DiscussionsController < GroupBaseController
   end
 
   def add_comment
+
+    logger.info ">>>>>>>>>>>>>>>> add_comment"
+
     build_comment
     if DiscussionService.add_comment(@comment)
       current_user.update_attributes(uses_markdown: params[:uses_markdown])
@@ -141,6 +174,10 @@ class DiscussionsController < GroupBaseController
   end
 
   def new_proposal
+
+    logger.info ">>>>>>>>>>>>>>>> new_proposal"
+
+
     if @discussion.current_motion
       redirect_to @discussion
       flash[:notice] = "A current proposal already exists for this discussion."
@@ -153,6 +190,10 @@ class DiscussionsController < GroupBaseController
   end
 
   def show_description_history
+
+    logger.info ">>>>>>>>>>>>>>>> show_description_history"
+
+
     @originator = User.find @discussion.originator.to_i
     respond_to do |format|
       format.js
@@ -160,6 +201,10 @@ class DiscussionsController < GroupBaseController
   end
 
   def preview_version
+
+    logger.info ">>>>>>>>>>>>>>>> preview_version"
+
+
     # assign live item if no version_id is passed
     if params[:version_id].present?
       version = PaperTrail::Version.find(params[:version_id])
@@ -172,6 +217,10 @@ class DiscussionsController < GroupBaseController
   end
 
   def update_version
+
+    logger.info ">>>>>>>>>>>>>>>> update_version"
+
+
     @version = PaperTrail::Version.find(params[:version_id])
     @version.reify.save!
     redirect_to @version.reify()
@@ -180,16 +229,28 @@ class DiscussionsController < GroupBaseController
   private
 
   def we_dont_serve_images_here_google_bot
+
+    logger.info ">>>>>>>>>>>>>>>> we_dont_serve_images_here_google_bot"
+
+
     if request.format == :png
       render :text => 'Not Found', :status => '404'
     end
   end
 
   def load_resource_by_key
+
+    logger.info ">>>>>>>>>>>>>>>> load_resource_by_key"
+
+
     @discussion ||= Discussion.published.find_by_key!(params[:id])
   end
 
   def build_comment
+
+    logger.info ">>>>>>>>>>>>>>>> load_resource_by_key"
+
+
     @comment = Comment.new(body: params[:comment],
                            uses_markdown: params[:uses_markdown])
 
@@ -203,16 +264,28 @@ class DiscussionsController < GroupBaseController
   end
 
   def build_discussion
+
+    logger.info ">>>>>>>>>>>>>>>> build_discussion"
+
+
     @discussion = Discussion.new(permitted_params.discussion)
     @discussion.author = current_user
   end
 
   def mark_as_read
+
+    logger.info ">>>>>>>>>>>>>>>> mark_as_read"
+
+
     @discussion_reader.viewed!(@discussion.last_activity_at) if @discussion_reader
     @motion_reader.viewed! if @motion_reader
   end
 
   def assign_meta_data
+
+    logger.info ">>>>>>>>>>>>>>>> assign_meta_data"
+
+
     if @group.privacy == 'public'
       @meta_title = @discussion.title
       @meta_description = @discussion.description
@@ -220,10 +293,18 @@ class DiscussionsController < GroupBaseController
   end
 
   def group
+
+    logger.info ">>>>>>>>>>>>>>>> group"
+
+
     @group ||= find_group
   end
 
   def find_group
+
+    logger.info ">>>>>>>>>>>>>>>> find_group"
+
+
     if (params[:id] && (params[:id] != "new"))
       Discussion.published.find(params[:id]).group
     elsif params[:discussion][:group_id]
