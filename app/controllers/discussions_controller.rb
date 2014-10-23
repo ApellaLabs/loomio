@@ -100,6 +100,13 @@ class DiscussionsController < GroupBaseController
     @pro_con = ProCon.new
     @pro_con.discussion = @discussion
 
+    session[:return_to] = {
+        url: request.env['REQUEST_URI'],
+        discussion: @discussion.id
+    }
+
+    logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 1 #{session[:return_to]}"
+
     if params[:proposal]
       @motion = @discussion.motions.find_by_key!(params[:proposal])
     else

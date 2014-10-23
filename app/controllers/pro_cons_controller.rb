@@ -1,6 +1,6 @@
 class ProConsController < GroupBaseController
 
-  before_filter :we_dont_serve_images_here_google_bot
+  # before_filter :we_dont_serve_images_here_google_bot
   before_filter :authenticate_user!, :except => [:show, :index]
   before_filter :load_resource_by_key, except: [:new, :create, :index]
   authorize_resource :except => [:new, :create, :index, :add_comment]
@@ -18,11 +18,6 @@ class ProConsController < GroupBaseController
 
     logger.info ">>>>>>>>>>>>>>>> edit"
 
-    # u = current_user
-
-    # d = u.discussions.first
-
-    # d.pro_cons.create({body:'test', cons:false})
 
     # p = ProCon.last
 
@@ -47,15 +42,24 @@ class ProConsController < GroupBaseController
   def create
 
     logger.info ">>>>>>>>>>>>>>>> create"
+    logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 2 #{session[:return_to].inspect}"
+    discussion = current_user.discussions.find(session[:return_to][:discussion])
 
-    build_discussion
-    if DiscussionService.start_discussion(@discussion)
-      flash[:success] = t("success.discussion_created")
-      redirect_to @discussion
-    else
-      render action: :new
-      flash[:error] = t("error.discussion_not_created")
-    end
+    @pro_cons = ProCon.new(pro_con_params)
+    @pro_cons.discussion_id = discussion.id
+
+    @pro_cons.save!
+
+    logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 2 #{discussion.inspect}"
+
+    redirect_to session[:return_to][:url]
+    session[:return_to] = nil
+
+
+    return
+
+
+    #
   end
 
   def destroy
@@ -118,6 +122,10 @@ class ProConsController < GroupBaseController
     @comment.attachment_ids = attachment_ids
     @comment.attachments_count = attachment_ids.size
     @comment
+  end
+
+  def pro_con_params
+    params.require(:pro_con).permit(:body, :cons)
   end
 
 end

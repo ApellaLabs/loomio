@@ -57,20 +57,20 @@
               %ul.selector-list
                 - @discussion.comments.where('comment_votes_count>0').order('comment_votes_count desc').limit(3).each do |comment|
                   %li.selector-item.empty-list-message#top-votes= render 'comments/comment_limited', comment: comment
-          .col-sm-12#content-comments
+          .col-sm-12#content-procons
             %h3.header-text= t 'Pro cons'
-            .col-sm-6#content-proposal
+            .col-sm-6
               %h3.header-text= t 'Cons'
               .large-icon.decision-icon
               .content-proposal-body
                 %ul.selector-list
 
-            .col-sm-6#content-proposal
+            .col-sm-6
               %h3.header-text= t 'Pro'
               .large-icon.decision-icon
               .content-proposal-body
                 %ul.selector-list
-            = render 'pro_cons/new'
+            = render 'pro_cons/new', {procons: true}
 
           .col-sm-12#content-comments
             .large-icon.discussion-icon.enabled-icon
