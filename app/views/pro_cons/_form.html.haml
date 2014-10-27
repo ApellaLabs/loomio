@@ -10,8 +10,7 @@
     = f.label :body
     = f.text_area :body
   .field
-    = f.label :cons
-    = f.text_field :cons
+    = f.hidden_field :cons, value: $con
   .field
     = f.label :user_id
     = @pro_con.discussion.user.name

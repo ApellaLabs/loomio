@@ -60,17 +60,21 @@
           .col-sm-12#content-procons
             %h3.header-text= t 'Pro cons'
             .col-sm-6
+              %h3.header-text= t 'Pros'
+              .large-icon.decision-icon
+              .content-proposal-body
+                - $con = false
+                %ul.selector-list
+                  = render collection: ProCon.pros, partial: 'pro_cons/pro_cons_list', as: :item
+              = render 'pro_cons/form'
+            .col-sm-6
               %h3.header-text= t 'Cons'
               .large-icon.decision-icon
               .content-proposal-body
+                - $con = true
                 %ul.selector-list
-
-            .col-sm-6
-              %h3.header-text= t 'Pro'
-              .large-icon.decision-icon
-              .content-proposal-body
-                %ul.selector-list
-            = render 'pro_cons/new', {procons: true}
+                  = render collection: ProCon.cons, partial: 'pro_cons/pro_cons_list', as: :item
+              = render 'pro_cons/form'
 
           .col-sm-12#content-comments
             .large-icon.discussion-icon.enabled-icon
