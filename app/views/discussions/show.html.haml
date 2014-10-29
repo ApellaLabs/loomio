@@ -61,7 +61,6 @@
             %h3.header-text= t 'Pro cons'
             .col-sm-6
               %h3.header-text= t 'Pros'
-              .large-icon.decision-icon
               .content-proposal-body
                 - $con = false
                 %ul.selector-list
@@ -69,7 +68,6 @@
               = render 'pro_cons/form'
             .col-sm-6
               %h3.header-text= t 'Cons'
-              .large-icon.decision-icon
               .content-proposal-body
                 - $con = true
                 %ul.selector-list

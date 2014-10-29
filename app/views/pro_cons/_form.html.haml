@@ -7,8 +7,11 @@
           %li= msg
 
   .field
-    = f.label :body
-    = f.text_area :body
+    / = f.label :body
+    %div.input-group.input-group-lg
+      %span.input-group-addon
+    
+      = f.text_area :body, class: "form-control", rows: "1"
   .field
     = f.hidden_field :cons, value: $con
   .field
@@ -16,3 +19,10 @@
     = @pro_con.discussion.user.name
   .actions
     = f.submit 'Save'
+
+
+
+/ <div class="input-group input-group-lg">
+/   <span class="input-group-addon">@</span>
+/   <input type="text" class="form-control" placeholder="Username">
+/ </div>
