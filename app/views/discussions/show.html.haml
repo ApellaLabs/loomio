@@ -64,14 +64,14 @@
               .content-proposal-body
                 - $con = false
                 %ul.selector-list
-                  = render collection: ProCon.pros, partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: false}
+                  = render collection: @discussion.pro_cons.where(cons: false), partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: false}
               = render 'pro_cons/form'
             .col-sm-6
               / %h3.header-text= t 'Cons'
               .content-proposal-body
                 - $con = true
                 %ul.selector-list
-                  = render collection: ProCon.cons, partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: true}
+                  = render collection: @discussion.pro_cons.where(cons: true), partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: true}
               = render 'pro_cons/form'
 
           .col-sm-12#content-comments

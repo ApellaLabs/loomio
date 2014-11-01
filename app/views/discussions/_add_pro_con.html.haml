@@ -1,0 +1,41 @@
+= form_tag add_pro_con_discussion_path(discussion), :remote => true, id: "new-pro_con-form" do
+  = hidden_field_tag 'authenticity_token', form_authenticity_token
+  = render 'avatar', user: current_user_or_visitor
+  #pro_con-input{ data: {group: @group.id, autocomplete_path: members_autocomplete_group_path(@group) } }
+    .form-container
+      = hidden_field_tag 'cons'
+      = text_area_tag 'body', "", id: 'new-pro_con', class: 'js-warn-before-navigating-away', placeholder: t(:comment_form_placeholder)
+      #attachment-container
+
+    = submit_tag t(:pro_con_form_submit_button), class: "btn btn-primary submit", id: 'post-new-pro_con', :data => {:disable_with => t(:pro_con_form_submit_button)}
+  / - if user_signed_in?
+  /   .comment-toolbar
+  /     -unless browser.ie? && browser.version.to_i < 10
+  /       .attachment-icon#add-attachment-icon
+  /     .dropdown#comment-markdown-dropdown.global-markdown-setting
+  /       %a.dropdown-toggle{href:'#pro_con-markdown-dropdown', id:'pro_con-markdown-dropdown-link', 'data-toggle'=> 'dropdown'}
+  /         = markdown_img(@uses_markdown)
+  /       = render 'markdown_setting', target: current_user_or_visitor
+
+/ - if user_signed_in?
+/   -unless browser.ie? && browser.version.to_i < 10
+/     = s3_uploader_form post: attachments_url, as: "attachment[location]", redirect_url: iframe_upload_result_attachments_url do
+/       = file_field_tag :file, multiple: true
+
+/     %script#template-upload-in-progress{type: "text/x-tmpl"}
+/       .attachment-uploader
+/         .uploading-filename
+/           {%=o.name%}
+/         %button.close.cancel-upload &times;
+/         .progress.active
+/           .progress-bar
+
+/     %script#template-upload--attached{type: "text/x-tmpl"}
+/       .attachments
+/         .attachment-success{data: { 'attachment-id' => "{%=o.id%}" } }
+/           = link_to "{%=o.name%}", "{%=o.location%}", target: "_blank"
+/           ({%= (parseInt(o.size) / (1024*1024)).toFixed(2) + " MB" %})
+/           %button.close.remove-attachment &times;
+
+/     %script#template-upload--comment-input{type: "text/x-tmpl"}
+/       %input{type: 'hidden', name: "attachments[]", value: '{%=o.id%}', data: { 'attachment-id' => "{%=o.id%}" }}
