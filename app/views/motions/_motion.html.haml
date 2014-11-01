@@ -63,7 +63,7 @@
           denominator:  motion.group_size_when_voting
 
   .votes
-    .vote-close
+    .vote-close.glyphcon.glyphcon-remove
     - if can?(:vote, motion) && motion.user_has_not_voted?(current_user)
       %h3= t :state_your_position
       .vote-buttons.clearfix

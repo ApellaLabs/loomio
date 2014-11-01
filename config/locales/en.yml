@@ -1201,7 +1201,8 @@ en:
   pricing: 'Pricing'
   prev: "Prev"
   more: "More..."
-  translate: "Help translate Loomio!"
+  # translate: "Help translate Loomio!"
+  translate: "help with the translation!"
   translate_field: "See translation"
   loading_translation: "Loading translation..."
   translate_this_string: "Translate to %{language}"

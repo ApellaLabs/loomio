@@ -6,4 +6,8 @@ class ProCon < ActiveRecord::Base
   has_many :smiles
   belongs_to :discussion
 
+  def smiles_count
+    smiles ? smiles.count : 0
+  end
+
 end

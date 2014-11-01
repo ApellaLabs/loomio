@@ -5,10 +5,10 @@ $ ->
     title: 'There have been new comments since you last visited the group.'
 
 # adds bootstrap popovers to vote buttons
-$ ->
-  $(".position").popover
-    placement: "top",
-    trigger: "hover"
+#$ ->
+#  $(".position").popover
+#    placement: "top",
+#    trigger: "hover"
 
 #adds bootstrap tooltips to makdown-settings-dropdown buttons
 $ ->

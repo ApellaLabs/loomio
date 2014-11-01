@@ -1,3 +1,31 @@
+/ - if $con == true
+/     %li
+/         %div 
+/             .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #d49090;"}
+/                 .col-md-1{:style => "color: #777;"}
+/                     = link_to :url => {:controller => 'pro_cons_controller', :action => 'plus'}do |variable|
+/                         %i.glyphicon.glyphicon-plus
+/                     %br/
+/                     %div{:style => "text-align: center;"} #{item.smiles.length}
+/                     = link_to url: {controller: 'pro_cons_controller', action: 'minus'}do |variable|
+/                         %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
+/                 .col-md-11
+/                     %strong= item.body
+/ - if $con == false
+/     %li
+/         %div
+/             .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #90d490;"}
+/                 .col-md-1{:style => "color: #777;"}
+/                     = link_to :url => {:controller => 'pro_cons_controller', :action => 'plus'}do |variable|
+/                         %i.glyphicon.glyphicon-plus
+/                     %br/
+/                     %div{:style => "text-align: center;"} #{item.smiles.length}
+/                     = link_to url: {controller: 'pro_cons_controller', action: 'minus'}do |variable|
+/                         %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
+/                 .col-md-11
+/                     %strong= item.body
+                
+
 - if $con == true
     %li
         %div 
@@ -14,9 +42,9 @@
 - if $con == false
     %li
         %div
-            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #90d490;"}
+            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #90d490; height: #{item.smiles_count * 20 + 40}px;"}
                 .col-md-1{:style => "color: #777;"}
-                    = link_to :url => {:controller => 'pro_cons_controller', :action => 'plus'}do |variable|
+                    = link_to plus_smile_pro_con_path(id: item), method: :post do |variable|
                         %i.glyphicon.glyphicon-plus
                     %br/
                     %div{:style => "text-align: center;"} #{item.smiles.length}
@@ -24,7 +52,6 @@
                         %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
                 .col-md-11
                     %strong= item.body
-                
 
 / <%= link_to_remote 'All countries', :url => {:controller => 'countries', :action => 'new'}%>
 / <div id="populate_me"></div>
