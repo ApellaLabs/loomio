@@ -18,7 +18,7 @@
               %iframe.discussion-iframe{src: @discussion.iframe_src}
         .row
           .col-sm-6#content-proposal
-            .large-icon.decision-icon
+            / .large-icon.decision-icon
             %h3.header-text= t :current_decision
             .content-proposal-body
               %ul.selector-list
@@ -51,27 +51,27 @@
                       - else
                         %li.selector-item= render 'motions/motion_preview', motion: motion
           .col-sm-6#content-proposal
-            .large-icon.decision-icon
-            %h3.header-text= t 'Here should be text'
+            / .large-icon.decision-icon
+            %h3.header-text= t 'Top Comments'
             .content-proposal-body
               %ul.selector-list
                 - @discussion.comments.where('comment_votes_count>0').order('comment_votes_count desc').limit(3).each do |comment|
                   %li.selector-item.empty-list-message#top-votes= render 'comments/comment_limited', comment: comment
           .col-sm-12#content-procons
-            %h3.header-text= t 'Pro cons'
+            %h3.header-text= t 'Pros & Cons'
             .col-sm-6
-              %h3.header-text= t 'Pros'
+              / %h3.header-text= t 'Pros'
               .content-proposal-body
                 - $con = false
                 %ul.selector-list
-                  = render collection: ProCon.pros, partial: 'pro_cons/pro_cons_list', as: :item
+                  = render collection: ProCon.pros, partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: false}
               = render 'pro_cons/form'
             .col-sm-6
-              %h3.header-text= t 'Cons'
+              / %h3.header-text= t 'Cons'
               .content-proposal-body
                 - $con = true
                 %ul.selector-list
-                  = render collection: ProCon.cons, partial: 'pro_cons/pro_cons_list', as: :item
+                  = render collection: ProCon.cons, partial: 'pro_cons/pro_cons_list', as: :item, locals: {con: true}
               = render 'pro_cons/form'
 
           .col-sm-12#content-comments

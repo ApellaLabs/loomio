@@ -79,8 +79,12 @@
 
   #add-outcome-submit { margin: 5px 0 1em 0; }
   .closing-info {
-    font-size: $font-smaller;
-    color: $mid-grey; }
+    /*font-size: $font-smaller;*/
+    /*color: $mid-grey;*/
+    color: #29ABE2;
+    font-size: 2em;
+    font-weight: bold;
+  }
 
   #close-voting {
     float: right;

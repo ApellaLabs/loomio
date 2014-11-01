@@ -191,7 +191,7 @@ body.discussions.show {
     #previous-proposals .selector-list { border-top: 1px solid $lighter-grey; }
     .content-proposal-body {
       margin-bottom: 1em;
-      margin-left: 40px;
+      margin-left: 20px;
       @media (max-width: 768px) { margin-left: 50px; }
 
       ul.selector-list {
