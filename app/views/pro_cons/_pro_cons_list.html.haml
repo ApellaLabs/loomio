@@ -1,20 +1,7 @@
 - if $con == true
     %li
         %div 
-            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #d49090; height: #{(item.smiles.count * 20 - item.frowns.count * 20) + 80}px;"}
-                .col-md-2{:style => "color: #777;"}
-                    = link_to plus_smile_pro_con_path(id: item), method: :post do
-                        %i.glyphicon.glyphicon-plus
-                    %br/
-                    %div{:style => "text-align: left;"} #{item.smiles.length}
-                    = link_to minus_smile_pro_con_path(id: item), method: :post do
-                        %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
-                .col-md-10
-                    %strong= item.body
-- if $con == false
-    %li
-        %div
-            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #90d490; height: #{(item.smiles.count * 20 - item.frowns.count * 20) + 80}px;"}
+            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #d49090; height: #{(item.smiles.count * 20 - item.frowns.count * 20) + 80}px; min-height: 75px;"}
                 .col-md-2{:style => "color: #777;"}
                     = link_to plus_smile_pro_con_path(id: item), method: :post do
                         %i.glyphicon.glyphicon-plus
@@ -24,6 +11,16 @@
                         %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
                 .col-md-10
                     %strong= item.body
-
-/ <%= link_to_remote 'All countries', :url => {:controller => 'countries', :action => 'new'}%>
-/ <div id="populate_me"></div>
+- if $con == false
+    %li
+        %div
+            .row.well{:style => "padding: 10px; margin-bottom: 10px; background-color: #90d490; height: #{(item.smiles.count * 20 - item.frowns.count * 20) + 80}px; min-height: 75px;"}
+                .col-md-2{:style => "color: #777;"}
+                    = link_to plus_smile_pro_con_path(id: item), method: :post do
+                        %i.glyphicon.glyphicon-plus
+                    %br/
+                    %div{:style => "text-align: left;"} #{item.smiles.length} / #{item.frowns.length}
+                    = link_to minus_smile_pro_con_path(id: item), method: :post do
+                        %i.glyphicon.glyphicon-minus{style: 'margin-left: -2px;'}
+                .col-md-10
+                    %strong= item.body

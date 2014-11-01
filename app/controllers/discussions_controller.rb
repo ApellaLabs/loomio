@@ -149,6 +149,10 @@ class DiscussionsController < GroupBaseController
     redirect_to discussion_url @discussion
   end
 
+  def involvement
+    redierct_to involvement
+  end
+
   def move
 
     logger.info ">>>>>>>>>>>>>>>> move"
