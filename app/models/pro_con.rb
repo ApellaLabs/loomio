@@ -4,10 +4,15 @@ class ProCon < ActiveRecord::Base
   scope :pros, -> { where(cons: false) }
   
   has_many :smiles
+  has_many :frowns
   belongs_to :discussion
 
-  def smiles_count
-    smiles ? smiles.count : 0
+  def user_liked?(user)
+    smiles.find { |s| s.user == user }
+  end
+
+  def user_disliked?(user)
+    frowns.find { |s| s.user == user } if user
   end
 
 end

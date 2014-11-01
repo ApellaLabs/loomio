@@ -3,7 +3,7 @@ class ProConsController < GroupBaseController
   # before_filter :we_dont_serve_images_here_google_bot
   before_filter :authenticate_user!, :except => [:show, :index]
   before_filter :load_resource_by_key, except: [:new, :create, :index]
-  authorize_resource :except => [:new, :create, :index, :add_comment]
+  authorize_resource :except => [:new, :create, :index, :add_comment, :plus_smile, :minus_smile]
 
   rescue_from ActiveRecord::RecordNotFound do
     render 'application/display_error', locals: { message: t('error.not_found') }
@@ -26,22 +26,18 @@ class ProConsController < GroupBaseController
 
   end
 
-  def minus
-    logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--------Minus"
+  def pro_con
+    @pro_con ||= ProCon.find(params[:id])
+  end
+
+  def minus_smile
+    pro_con.frowns.create user: current_user
+    redirect_to pro_con.discussion
   end
 
   def plus_smile
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
-    logger.info "+++++++++++++++++++++++++++++";
+    pro_con.smiles.create user: current_user
+    redirect_to pro_con.discussion
   end
 
   def update

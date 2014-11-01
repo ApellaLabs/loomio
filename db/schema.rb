@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022154007) do
+ActiveRecord::Schema.define(version: 20141101145617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20141022154007) do
 
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "announcement_dismissals", force: true do |t|
     t.integer  "announcement_id"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "announcement_dismissals", ["announcement_id"], name: "index_announcement_dismissals_on_announcement_id", using: :btree
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "locale",     default: "en", null: false
     t.datetime "starts_at",                 null: false
     t.datetime "ends_at",                   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "attachments", force: true do |t|
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "filename"
     t.text     "location"
     t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "filesize"
   end
 
@@ -65,16 +65,16 @@ ActiveRecord::Schema.define(version: 20141022154007) do
 
   create_table "campaigns", force: true do |t|
     t.string   "showcase_url"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name",          null: false
     t.string   "manager_email", null: false
   end
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "position",   default: 0, null: false
   end
 
@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.datetime "edited_at"
   end
 
-  add_index "comments", ["discussion_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["discussion_id"], name: "index_comments_on_discussion_id", using: :btree
   add_index "comments", ["parent_id"], name: "index_comments_on_parent_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
@@ -113,8 +112,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.integer  "user_id"
     t.string   "email"
     t.text     "message"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "destination", default: "contact@loomio.org"
   end
 
@@ -123,8 +122,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "name"
     t.string   "email"
     t.string   "source"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
@@ -139,8 +138,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -166,8 +165,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.boolean  "following"
   end
 
-  add_index "discussion_readers", ["discussion_id"], name: "index_motion_read_logs_on_discussion_id", using: :btree
-  add_index "discussion_readers", ["user_id", "discussion_id"], name: "index_discussion_read_logs_on_user_id_and_discussion_id", using: :btree
+  add_index "discussion_readers", ["discussion_id"], name: "index_discussion_readers_on_discussion_id", using: :btree
+  add_index "discussion_readers", ["user_id", "discussion_id"], name: "index_discussion_readers_on_user_id_and_discussion_id", using: :btree
   add_index "discussion_readers", ["user_id"], name: "index_motion_read_logs_on_user_id", using: :btree
 
   create_table "discussions", force: true do |t|
@@ -183,12 +182,12 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.boolean  "is_deleted",       default: false, null: false
     t.integer  "comments_count",   default: 0,     null: false
     t.integer  "items_count",      default: 0,     null: false
-    t.datetime "archived_at"
     t.boolean  "private"
     t.string   "key"
+    t.datetime "archived_at"
     t.string   "iframe_src"
-    t.datetime "last_activity_at"
     t.integer  "motions_count",    default: 0
+    t.datetime "last_activity_at"
   end
 
   add_index "discussions", ["author_id"], name: "index_discussions_on_author_id", using: :btree
@@ -214,6 +213,13 @@ ActiveRecord::Schema.define(version: 20141022154007) do
   add_index "events", ["discussion_id"], name: "index_events_on_discussion_id", using: :btree
   add_index "events", ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id", using: :btree
 
+  create_table "frowns", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "pro_con_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "group_hierarchies", id: false, force: true do |t|
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
@@ -227,8 +233,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "name"
     t.text     "description"
     t.string   "admin_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "status"
     t.integer  "group_id"
     t.boolean  "cannot_contribute"
@@ -270,8 +276,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.text     "recipients"
     t.string   "message_subject"
     t.text     "message_body"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups", force: true do |t|
@@ -283,8 +289,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.integer  "parent_id"
     t.boolean  "hide_members",                       default: false
     t.text     "description"
-    t.integer  "memberships_count",                  default: 0,              null: false
     t.datetime "archived_at"
+    t.integer  "memberships_count",                  default: 0,              null: false
     t.integer  "max_size",                           default: 1000,           null: false
     t.boolean  "cannot_contribute",                  default: false
     t.integer  "distribution_metric"
@@ -300,16 +306,14 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "key"
     t.boolean  "can_start_group",                    default: true
     t.integer  "category_id"
-    t.text     "enabled_beta_features"
-    t.string   "subdomain"
-    t.integer  "theme_id"
     t.boolean  "is_visible_to_public",               default: false,          null: false
     t.boolean  "is_visible_to_parent_members",       default: false,          null: false
     t.string   "discussion_privacy_options",                                  null: false
     t.boolean  "members_can_add_members",            default: false,          null: false
     t.string   "membership_granted_upon",                                     null: false
-    t.boolean  "members_can_edit_discussions",       default: true,           null: false
-    t.boolean  "motions_can_be_edited",              default: false,          null: false
+    t.text     "enabled_beta_features"
+    t.string   "subdomain"
+    t.integer  "theme_id"
     t.string   "cover_photo_file_name"
     t.string   "cover_photo_content_type"
     t.integer  "cover_photo_file_size"
@@ -318,6 +322,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.boolean  "members_can_edit_discussions",       default: true,           null: false
+    t.boolean  "motions_can_be_edited",              default: false,          null: false
     t.boolean  "members_can_edit_comments",          default: true
     t.boolean  "members_can_raise_motions",          default: true,           null: false
     t.boolean  "members_can_vote",                   default: true,           null: false
@@ -355,8 +361,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "email"
     t.text     "introduction"
     t.integer  "group_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "requestor_id"
     t.integer  "responder_id"
     t.string   "response"
@@ -378,11 +384,11 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.datetime "updated_at"
     t.integer  "inviter_id"
     t.boolean  "email_new_discussions_and_proposals", default: true
-    t.datetime "archived_at"
     t.integer  "inbox_position",                      default: 0
+    t.datetime "archived_at"
     t.boolean  "admin",                               default: false, null: false
-    t.boolean  "is_suspended",                        default: false, null: false
     t.boolean  "following_by_default",                default: false, null: false
+    t.boolean  "is_suspended"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
@@ -444,16 +450,16 @@ ActiveRecord::Schema.define(version: 20141022154007) do
   create_table "omniauth_identities", force: true do |t|
     t.integer  "user_id"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
   end
 
-  add_index "omniauth_identities", ["email"], name: "index_personas_on_email", using: :btree
+  add_index "omniauth_identities", ["email"], name: "index_omniauth_identities_on_email", using: :btree
   add_index "omniauth_identities", ["provider", "uid"], name: "index_omniauth_identities_on_provider_and_uid", using: :btree
-  add_index "omniauth_identities", ["user_id"], name: "index_personas_on_user_id", using: :btree
+  add_index "omniauth_identities", ["user_id"], name: "index_omniauth_identities_on_user_id", using: :btree
 
   create_table "pro_cons", force: true do |t|
     t.text     "body"
@@ -473,8 +479,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
   create_table "subscriptions", force: true do |t|
     t.integer  "group_id"
     t.decimal  "amount",     precision: 8, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "profile_id"
   end
 
@@ -483,8 +489,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
   create_table "themes", force: true do |t|
     t.text     "style"
     t.string   "name"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "pages_logo_file_name"
     t.string   "pages_logo_content_type"
     t.integer  "pages_logo_file_size"
@@ -501,8 +507,8 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.string   "translatable_type"
     t.hstore   "fields"
     t.string   "language"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "translations", ["fields"], name: "translations_gin_fields", using: :gin
@@ -515,12 +521,12 @@ ActiveRecord::Schema.define(version: 20141022154007) do
   add_index "user_deactivation_responses", ["user_id"], name: "index_user_deactivation_responses_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                                           default: "",         null: false
-    t.string   "encrypted_password",                  limit: 128, default: ""
+    t.string   "email",                               default: "",         null: false
+    t.string   "encrypted_password",                  default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                                   default: 0
+    t.integer  "sign_in_count",                       default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -529,28 +535,28 @@ ActiveRecord::Schema.define(version: 20141022154007) do
     t.datetime "updated_at"
     t.string   "name"
     t.datetime "deactivated_at"
-    t.boolean  "is_admin",                                        default: false
-    t.string   "avatar_kind",                                     default: "initials", null: false
+    t.string   "avatar_kind",                         default: "initials", null: false
     t.string   "uploaded_avatar_file_name"
     t.string   "uploaded_avatar_content_type"
     t.integer  "uploaded_avatar_file_size"
     t.datetime "uploaded_avatar_updated_at"
+    t.boolean  "is_admin",                            default: false
     t.string   "avatar_initials"
     t.string   "username"
-    t.boolean  "email_followed_threads",                          default: true,       null: false
-    t.boolean  "email_when_proposal_closing_soon",                default: true,       null: false
+    t.boolean  "email_followed_threads",              default: true,       null: false
+    t.boolean  "email_when_proposal_closing_soon",    default: true,       null: false
     t.string   "authentication_token"
     t.string   "unsubscribe_token"
-    t.integer  "memberships_count",                               default: 0,          null: false
-    t.boolean  "uses_markdown",                                   default: false
+    t.integer  "memberships_count",                   default: 0,          null: false
+    t.boolean  "uses_markdown",                       default: false
     t.string   "selected_locale"
     t.string   "time_zone"
     t.string   "key"
     t.string   "detected_locale"
-    t.boolean  "email_missed_yesterday",                          default: true,       null: false
+    t.boolean  "email_missed_yesterday",              default: true,       null: false
     t.string   "email_api_key"
-    t.boolean  "email_new_discussions_and_proposals",             default: true,       null: false
-    t.boolean  "email_when_mentioned",                            default: true,       null: false
+    t.boolean  "email_new_discussions_and_proposals", default: true,       null: false
+    t.boolean  "email_when_mentioned",                default: true,       null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

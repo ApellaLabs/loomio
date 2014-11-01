@@ -1,9 +1,9 @@
 Loomio::Application.routes.draw do
 
-  # resources :pro_cons
   resources :pro_cons do
     member do
       post :plus_smile
+      post :minus_smile
     end
   end
 
