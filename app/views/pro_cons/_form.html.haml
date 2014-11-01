@@ -10,15 +10,14 @@
     / = f.label :body
     %div.input-group.input-group-lg
       %span.input-group-addon
-    
-      = f.text_area :body, class: "form-control", rows: "1"
+        = render 'avatar', user: current_user_or_visitor
+      = f.text_area :body, class: "form-control", rows: "2"
   .field
     = f.hidden_field :cons, value: $con
-  .field
-    = f.label :user_id
-    = @pro_con.discussion.user.name
+  / .field
+  /   = @pro_con.discussion.user.name
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-primary', style: 'margin-top: 10px;' 
 
 
 
