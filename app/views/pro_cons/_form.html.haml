@@ -1,4 +1,4 @@
-= form_for @pro_con do |f|
+= form_for @pro_con, class: 'form-horisontal' do |f|
   - if @pro_con.errors.any?
     #error_explanation
       %h2= "#{pluralize(@pro_con.errors.count, "error")} prohibited this pro_con from being saved:"
@@ -8,10 +8,11 @@
 
   .field
     / = f.label :body
-    %div.input-group.input-group-lg
-      %span.input-group-addon
+    %div.form-group
+      %label.col-sm-1.control-label{style:'padding-right: 5px;'}
         = render 'avatar', user: current_user_or_visitor
-      = f.text_area :body, class: "form-control", rows: "2"
+      %div.col-sm-11
+        = f.text_area :body, class: "form-control", rows: "2"
   .field
     = f.hidden_field :cons, value: $con
   / .field
